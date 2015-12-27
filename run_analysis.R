@@ -1,3 +1,6 @@
+#This file loads data from the UCI HAR Dataset and aggregates it together.
+#Note: the UCI HAR Dataset folder must be located in the working directory
+
 #load used libraries
 library(plyr)
 
@@ -41,8 +44,6 @@ testData <- cbind(testData, Y_Test)
 
 #Combine Data Sets
 CombinedData <- rbind(trainingData, testData)
-names(CombinedData)
-
 
 #Aggregate data
 aggregated_data <- aggregate(CombinedData, by = CombinedData[c("Subject","Activity")],FUN = mean)
@@ -68,5 +69,6 @@ tidyData <- aggregated_data[,c(2:69)]
 
 #Write Data Set
 write.table(tidyData, "tidyData.txt", row.name = FALSE)
+
 
 
